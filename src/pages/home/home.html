@@ -1,14 +1,40 @@
 <ion-header>
-  <ion-navbar>
+  <ion-toolbar>
     <ion-title>
-      Ionic Blank
+        <h2 style="background-color: #24809B">
+      Videojuegos
+    </h2>
     </ion-title>
-  </ion-navbar>
+ 
+    <ion-buttons end>
+      <button ion-button icon-only (click)="buscar()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding style = "background-color: #56BDDB">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor= "let producto of productos" col-6>
+        <ion-card  (click)="verP(producto)">
+          <img *ngIf="producto.ad.hasOwnProperty('thumbnail')"
+          src = "https://img.segundamano.mx/cover/{{producto.ad.thumbnail.path}}">
+          <img *ngIf = "producto.ad.hasOwnProperty('thumbnail') == false" src="../assets/imgs/gamepad.png">
+          <ion-card-content>
+            <h2 *ngIf="producto.ad.hasOwnProperty('subject')">
+              {{producto.ad.subject}}
+          </h2>
+          <p *ngIf="producto.ad.hasOwnProperty('locations')">{{producto.ad.locations[0].locations[0].label}} , {{producto.ad.locations[0].label}}</p>
+          <h2 *ngIf="producto.ad.hasOwnProperty('list_price')">
+            {{producto.ad.list_price.label}}
+          </h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+

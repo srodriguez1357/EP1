@@ -1,0 +1,70 @@
+<!--
+  Generated template for the ConsolasPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title> <h2 style="background-color: #24809B">Consola</h2></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding style = "background-color: #56BDDB">
+  <ion-card>
+    <ion-slides pager>
+      <ion-slide *ngFor="let img of imgs">
+        <img src="https://img.segundamano.mx/medium/{{img.path}}">
+      </ion-slide>
+    </ion-slides>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      {{consola.ad.subject}}
+      <ion-icon *ngIf="!fav.existe(consola)" name="heart" item-end (click)="favoritos(consola)"> </ion-icon>
+      <!-- <ion-icon *ngIf="fav.existe(consola)"name="heart" color="danger"item-end (click)="remove(consola)"> </ion-icon> -->
+    </ion-item>
+    <ion-item>
+      <h2 *ngIf="consola.ad.hasOwnProperty('list_price')">
+        {{consola.ad.list_price.label}}
+      </h2>
+      <ion-icon name="share" item-end></ion-icon>
+    </ion-item>
+    <ion-card-content *ngIf="consola.ad.hasOwnProperty('ad_details')">
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-avatar>
+        <img src="../assets/imgs/logo.png">
+      </ion-avatar>
+      <h2 *ngIf="consola.ad.hasOwnProperty('user')">
+        {{consola.ad.user.account.name}}
+      </h2>
+      <p *ngIf="consola.ad.hasOwnProperty('user')">
+        {{consola.ad.user.account.since}}
+      </p>
+    </ion-item>
+  </ion-card>
+    <ion-card>
+      <ion-card-header>
+        Características
+      </ion-card-header>
+      <ion-card-content>
+        <h2 *ngIf="consola.ad.hasOwnProperty('locations')">
+          Ubicación: {{consola.ad.locations[0].locations[0].locations[0].label}}, {{consola.ad.locations[0].label}}
+        </h2>
+        <h2 *ngIf="consola.ad.hasOwnProperty('list_time')">
+          Publicado: {{consola.ad.list_time.label}}
+        </h2>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        Descripción
+      </ion-card-header>
+      <ion-card-content>
+        {{consola.ad.body}}
+      </ion-card-content>
+    </ion-card>
+</ion-content>
